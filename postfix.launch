@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Sample script for launching the postfix container
+
+docker kill postfix
+docker rm postfix
+
+docker run -d -t \
+	-p 0.0.0.0:25:25 \
+    -p 0.0.0.0:143:143 \
+    -p 0.0.0.0:993:993 \
+    -p 0.0.0.0:143:143 \
+    -p 0.0.0.0:465:465 \
+    -v /usr/local/etc/postfix:/etc/postfix \
+    --name postfix tragus/postfix
